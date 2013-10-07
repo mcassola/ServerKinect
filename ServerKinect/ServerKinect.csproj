@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AA2D3699-3FC9-43D6-AA24-CD930E487BC7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServerKinect</RootNamespace>
+    <AssemblyName>ServerKinect</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Kinect, Version=1.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="OpenNI.net, Version=1.0.0.25, Culture=neutral, PublicKeyToken=6b43d0c6cf74ee7f, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\OpenNI\OpenNI.net.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Ventuz.OSC">
+      <HintPath>..\..\..\Documents\Visual Studio 2012\Projects\Server\Server\Ventuz.OSC.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="XnVNITE.net, Version=1.5.2.21, Culture=neutral, PublicKeyToken=399870656fc6c787, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\OpenNI\XnVNITE.net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clustering\ClusterCollection.cs" />
+    <Compile Include="Clustering\ClusterPrototypeFactory.cs" />
+    <Compile Include="Clustering\ClusterDataSourceSettings.cs" />
+    <Compile Include="Clustering\IClusterMergeStrategy.cs" />
+    <Compile Include="Clustering\IDepthPointFilter.cs" />
+    <Compile Include="Clustering\KMeansClusterFactory.cs" />
+    <Compile Include="Clustering\DefaultMergeStrategy.cs" />
+    <Compile Include="Clustering\ClusterPrototype.cs" />
+    <Compile Include="Clustering\IClusterFactory.cs" />
+    <Compile Include="Gesture\Gesture.cs" />
+    <Compile Include="Gesture\GestureController.cs" />
+    <Compile Include="Gesture\GestureEnumTypes.cs" />
+    <Compile Include="Gesture\GestureEventArgs.cs" />
+    <Compile Include="Gesture\IRelativeGestureSegment.cs" />
+    <Compile Include="Gesture\Segments\JoinedHandsSegment.cs" />
+    <Compile Include="Gesture\Segments\MenuSegments.cs" />
+    <Compile Include="Gesture\Segments\SwipeDown\SwipeDownSegment1.cs" />
+    <Compile Include="Gesture\Segments\SwipeDown\SwipeDownSegment2.cs" />
+    <Compile Include="Gesture\Segments\SwipeDown\SwipeDownSegment3.cs" />
+    <Compile Include="Gesture\Segments\SwipeLeftSegments.cs" />
+    <Compile Include="Gesture\Segments\SwipeRightSegments.cs" />
+    <Compile Include="Gesture\Segments\SwipeUp\SwipeUpSegment1.cs" />
+    <Compile Include="Gesture\Segments\SwipeUp\SwipeUpSegment2.cs" />
+    <Compile Include="Gesture\Segments\SwipeUp\SwipeUpSegment3.cs" />
+    <Compile Include="Gesture\Segments\WaveLeftSegments.cs" />
+    <Compile Include="Gesture\Segments\WaveRightSegments.cs" />
+    <Compile Include="Gesture\Segments\ZoomSegments.cs" />
+    <Compile Include="HandTracking\DistanceMap.cs" />
+    <Compile Include="HandTracking\FingerBaseDetector.cs" />
+    <Compile Include="HandTracking\FingerPoint.cs" />
+    <Compile Include="HandTracking\FingerPointDetector.cs" />
+    <Compile Include="HandTracking\HandCollection.cs" />
+    <Compile Include="HandTracking\HandData.cs" />
+    <Compile Include="HandTracking\HandDataFactory.cs" />
+    <Compile Include="HandTracking\HandDataSource.cs" />
+    <Compile Include="HandTracking\HandDataSourceSettings.cs" />
+    <Compile Include="HandTracking\IdGenerator.cs" />
+    <Compile Include="HandTracking\IFinger.cs" />
+    <Compile Include="HandTracking\IHand.cs" />
+    <Compile Include="HandTracking\IHandDataFactory.cs" />
+    <Compile Include="HandTracking\IHandDataSource.cs" />
+    <Compile Include="HandTracking\Mouse\CenterOfClusterCursorMode.cs" />
+    <Compile Include="HandTracking\Mouse\CenterOfHandCursorMode.cs" />
+    <Compile Include="HandTracking\Mouse\ClickModeBase.cs" />
+    <Compile Include="HandTracking\Mouse\FingerCursorMode.cs" />
+    <Compile Include="HandTracking\Mouse\HandClickMode.cs" />
+    <Compile Include="HandTracking\Mouse\HandTrackingCursorMode.cs" />
+    <Compile Include="HandTracking\Mouse\IClickMode.cs" />
+    <Compile Include="HandTracking\Mouse\ICursorMode.cs" />
+    <Compile Include="HandTracking\Mouse\MouseController.cs" />
+    <Compile Include="HandTracking\Mouse\SecondHandClickMode.cs" />
+    <Compile Include="HandTracking\Mouse\TwoFingerClickMode.cs" />
+    <Compile Include="HandTracking\Mouse\UserInput.cs" />
+    <Compile Include="HandTracking\Palm.cs" />
+    <Compile Include="HandTracking\PalmFinder.cs" />
+    <Compile Include="HandTracking\Persistence\DepthFrameEntity.cs" />
+    <Compile Include="HandTracking\Persistence\FingerEntity.cs" />
+    <Compile Include="HandTracking\Persistence\HandEntity.cs" />
+    <Compile Include="HandTracking\Persistence\TestFrameEntity.cs" />
+    <Compile Include="HandTracking\Persistence\TestFrameRepository.cs" />
+    <Compile Include="HandTracking\ShapeHandDataFactory.cs" />
+    <Compile Include="HandTracking\Touch\KinectTouchDevice.cs" />
+    <Compile Include="DataSource\IKinectSensor.cs" />
+    <Compile Include="Skeleton\ISkeletonDataSource.cs" />
+    <Compile Include="Skeleton\jointsTypes.cs" />
+    <Compile Include="OpenNI\NUISkeletonDataSource.cs" />
+    <Compile Include="OpenNI\OpenNISkeletonDataSource.cs" />
+    <Compile Include="OpenNI\OpenNISkeletonDataSourceBase.cs" />
+    <Compile Include="OpenNI\SkeletonPointerDataSource.cs" />
+    <Compile Include="OpenNI\ISkeletonGenerator.cs" />
+    <Compile Include="OpenNI\SkeletonGeneratorAdapter.cs" />
+    <Compile Include="OpenNI\ISkeletonPointerDataSource.cs" />
+    <Compile Include="OSCServer\OscServer.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Core\CoreProcessor.cs" />
+    <Compile Include="Samples\ImageManipulation\HandTracker.cs" />
+    <Compile Include="Samples\ImageManipulation\ImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Samples\ImageManipulation\ImageForm.Designer.cs">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\ImageManipulation\ImageLoader.cs" />
+    <Compile Include="Samples\ImageManipulation\ImageOperations.cs" />
+    <Compile Include="Samples\ImageManipulation\InteractiveImage.cs" />
+    <Compile Include="Samples\ImageManipulation\Transformation.cs" />
+    <Compile Include="Samples\KinectStatusNUI.cs" />
+    <Compile Include="Samples\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Samples\MainForm.Designer.cs" />
+    <Compile Include="Samples\MultiGeneratorDataSource.cs" />
+    <Compile Include="Samples\NIContextDataSourceBase.cs" />
+    <Compile Include="Samples\Program.cs" />
+    <Compile Include="Samples\Properties\Settings.Designer.cs" />
+    <Compile Include="Samples\SettingServerKinect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Samples\SettingServerKinect.Designer.cs">
+      <DependentUpon>SettingServerKinect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Samples\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\VolumeFilterClusterDataSource.cs" />
+    <Compile Include="Skeleton\JointSkeleton.cs" />
+    <Compile Include="Skeleton\NUISkeletonFrame.cs" />
+    <Compile Include="OpenNI\TrackingClusterDataSource.cs" />
+    <Compile Include="OpenNI\PointerVolumePointFilter.cs" />
+    <Compile Include="OpenNI\DepthDataFrameFactory.cs" />
+    <Compile Include="OpenNI\IGenerator.cs" />
+    <Compile Include="OpenNI\OpenNIRunner.cs" />
+    <Compile Include="DataSource\SensorDataSource.cs" />
+    <Compile Include="SKDMicrosoft\ImageFrameDepthPointFilter.cs" />
+    <Compile Include="SKDMicrosoft\KinectSensorAdapter.cs" />
+    <Compile Include="SKDMicrosoft\SDKBitmapDataSource.cs" />
+    <Compile Include="SKDMicrosoft\SDKClusterDataSource.cs" />
+    <Compile Include="SKDMicrosoft\SDKDataSourceFactory.cs" />
+    <Compile Include="SKDMicrosoft\SDKDepthBitmapDataSource.cs" />
+    <Compile Include="SKDMicrosoft\SDKDepthImageDataSource.cs" />
+    <Compile Include="SKDMicrosoft\SDKImageDataSource.cs" />
+    <Compile Include="SKDMicrosoft\SDKRgbBitmapDataSource.cs" />
+    <Compile Include="SKDMicrosoft\SDKRgbImageDataSource.cs" />
+    <Compile Include="SKDMicrosoft\SDKSkeletonFrame.cs" />
+    <Compile Include="Skeleton\SkeletonDataSource.cs" />
+    <Compile Include="Skeleton\SkeletonsData.cs" />
+    <Compile Include="Video\ImageDataSource.cs" />
+    <Compile Include="Video\DepthBitmapDataSource.cs" />
+    <Compile Include="Video\RgbBitmapDataSource.cs" />
+    <Compile Include="Video\IImageFactory.cs" />
+    <Compile Include="Video\DepthImageSourceFactory.cs" />
+    <Compile Include="Video\IImageDataSource.cs" />
+    <Compile Include="Video\DepthImageFactoryBase.cs" />
+    <Compile Include="Video\RgbImageSourceFactory.cs" />
+    <Compile Include="Shape\DepthMap.cs" />
+    <Compile Include="Shape\ClusterShapeDataSource.cs" />
+    <Compile Include="Shape\ClusterShapeFactory.cs" />
+    <Compile Include="Shape\IClusterShapeFactory.cs" />
+    <Compile Include="Shape\IShapeDataSource.cs" />
+    <Compile Include="Shape\ShapeCollection.cs" />
+    <Compile Include="Shape\ShapeDataSourceSettings.cs" />
+    <Compile Include="Shape\Contour.cs" />
+    <Compile Include="Shape\ContourFactory.cs" />
+    <Compile Include="Shape\ContourTracer.cs" />
+    <Compile Include="Shape\ConvexHull.cs" />
+    <Compile Include="Shape\GrahamScan.cs" />
+    <Compile Include="Shape\LineThinner.cs" />
+    <Compile Include="Shape\PointAngleComparer.cs" />
+    <Compile Include="Shape\Shape.cs" />
+    <Compile Include="Shape\Vector.cs" />
+    <Compile Include="OpenNI\DepthGeneratorAdapter.cs" />
+    <Compile Include="OpenNI\GeneratorAdapterBase.cs" />
+    <Compile Include="OpenNI\IDepthGenerator.cs" />
+    <Compile Include="OpenNI\ImageGeneratorAdapter.cs" />
+    <Compile Include="OpenNI\IImageGenerator.cs" />
+    <Compile Include="OpenNI\OpenNIClusterDataSource.cs" />
+    <Compile Include="OpenNI\PointerDepthPointFilter.cs" />
+    <Compile Include="Utilities\ActionRunner.cs" />
+    <Compile Include="Utilities\ArrayToPointerFactory.cs" />
+    <Compile Include="DataSource\IImagePointerDataSource.cs" />
+    <Compile Include="Video\BitmapDataSource.cs" />
+    <Compile Include="DataSource\IDataSourceFactory.cs" />
+    <Compile Include="Video\IBitmapFactory.cs" />
+    <Compile Include="Shape\ILocatable.cs" />
+    <Compile Include="OpenNI\OpenNIDataSourceFactory.cs" />
+    <Compile Include="Video\RgbBitmapFactory.cs" />
+    <Compile Include="DataSource\DepthFramePointerDataSource.cs" />
+    <Compile Include="DataSource\DepthDataFrame.cs" />
+    <Compile Include="DataSource\DepthDataFrameRepository.cs" />
+    <Compile Include="Video\DepthBitmapFactory.cs" />
+    <Compile Include="Shape\IntSize.cs" />
+    <Compile Include="OpenNI\OpenNIDataSourceBase.cs" />
+    <Compile Include="DataSource\DataSourceProcessor.cs" />
+    <Compile Include="OpenNI\DepthDataFrameSource.cs" />
+    <Compile Include="Video\DepthImageDataSource.cs" />
+    <Compile Include="OpenNI\DepthPointerDataSource.cs" />
+    <Compile Include="Clustering\IClusterDataSource.cs" />
+    <Compile Include="DataSource\IDataSource.cs" />
+    <Compile Include="DataSource\IDepthPointerDataSource.cs" />
+    <Compile Include="Video\IBitmapDataSource.cs" />
+    <Compile Include="DataSource\IRGBPointerDataSource.cs" />
+    <Compile Include="Video\RgbImageDataSource.cs" />
+    <Compile Include="OpenNI\RgbPointerDataSource.cs" />
+    <Compile Include="Clustering\Cluster.cs" />
+    <Compile Include="DataSource\Histogram.cs" />
+    <Compile Include="Clustering\KMeans.cs" />
+    <Compile Include="Shape\Point.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shape\Range.cs" />
+    <Compile Include="Shape\Rectangle.cs" />
+    <Compile Include="Shape\Size.cs" />
+    <Compile Include="HandTracking\Visual\BrushSwitcher.cs" />
+    <Compile Include="HandTracking\Visual\ClusterLayer.cs" />
+    <Compile Include="HandTracking\Visual\HandLayer.cs" />
+    <Compile Include="HandTracking\Visual\ILayer.cs" />
+    <Compile Include="HandTracking\Visual\LayerBase.cs" />
+    <Compile Include="Samples\VideoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Samples\VideoControl.Designer.cs">
+      <DependentUpon>VideoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shape\Volume.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Samples\ImageManipulation\ImageForm.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Samples\MainForm.resx" />
+    <EmbeddedResource Include="Samples\SettingServerKinect.resx">
+      <DependentUpon>SettingServerKinect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Samples\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Samples\VideoControl.resx">
+      <DependentUpon>VideoControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Samples\Images\P2.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Samples\Properties\Settings.settings" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Samples\Images\P3.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Samples\Images\P4.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Samples\Images\P5.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Samples\config.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\serverKinect.ico" />
+    <None Include="Resources\Reload-icon.png" />
+    <None Include="Resources\Reload-icon %281%29.png" />
+    <None Include="Resources\openNI1.png" />
+    <None Include="Resources\openNI.png" />
+    <None Include="Resources\kinectNotFound.png" />
+    <None Include="Resources\kinectNotFound.jpg" />
+    <None Include="Resources\kinect_0012.png" />
+    <None Include="Resources\kinect_0011.png" />
+    <None Include="Resources\kinect_001.png" />
+    <None Include="Resources\edit_clear %281%29.png" />
+    <None Include="Resources\disconnect.png" />
+    <None Include="Resources\diagram_v2_13%281%29.png" />
+    <None Include="Resources\connect-icon.png" />
+    <Content Include="Samples\organizer.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
