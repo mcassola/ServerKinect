@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Kinect;
+using ServerKinect.HandTracking.Visual;
 using ServerKinect.Skeleton;
 using System;
 using System.Collections.Generic;
@@ -159,11 +160,11 @@ namespace ServerKinect.OSCServer
         }
 
 
-        public void sendData(SkeletonDataSource data, string gesture, string hands, System.Drawing.Image image, string pps)
+        public void sendData(SkeletonDataSource data, string gesture, HandLayer hands, System.Drawing.Image image, string pps, string kinectStatus)
         {
             string infoPackage = "";
 
-            Object[] args2 = new Object[6];
+            Object[] args2 = new Object[7];
             args2[0] = (string)DateTime.Now.Millisecond.ToString();
 
             if (data != null)
@@ -176,7 +177,11 @@ namespace ServerKinect.OSCServer
 
             args2[2] = (string)gesture;
 
-            args2[3] = (string)hands;
+            if (hands != null)
+                args2[3] = (string)hands.ToString();
+            else
+                args2[3] = "";
+
 
             byte[] imageToSend = sendImage(image);
 
@@ -189,6 +194,10 @@ namespace ServerKinect.OSCServer
                 args2[4] = "not image";
 
             args2[5] = (string)pps;
+
+            if (infoPackage == "")
+                infoPackage += "/status";
+            args2[6] = (string)kinectStatus;
 
             OscElement elem2 = new OscElement(infoPackage, args2);//imageToSend.data);
             foreach (UdpWriter oscWriter in oscWriterList)

@@ -20,6 +20,7 @@ using ServerKinect.Samples;
 using ServerKinect.OpenNI;
 using ServerKinect.SKDMicrosoft;
 using ServerKinect.HandTracking.Visual;
+using System.Windows.Threading;
 
 namespace ServerKinect.Core
 {
@@ -43,6 +44,7 @@ namespace ServerKinect.Core
         private SkeletonDataSource bufferSkeletonData;
         public static int countPPS;
         public static string PPS = "0";
+        private DispatcherTimer timerUDP;
 
         public CoreProcessor(VideoControl video, OscServer server, Label label, MainForm padre) {
             this.server = server;
@@ -52,27 +54,27 @@ namespace ServerKinect.Core
             this.videoControl = video;
             this.activeDataSources = new List<IDataSource>();
             InitializeGesture();
-            //initTimer();
+            InitConnection();
         }
 
-      /*  private void initTimer()
-        {
-            this.timer = new System.Timers.Timer();
-            // 
-            // timer1
-            // 
-           
-            this.timer.Enabled = true;
-            this.timer.Interval =100D;
-          //  this.timer.SynchronizingObject = this.padre;
-            this.timer.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Elapsed);
+
+      
+        private void InitConnection() {
+            //Init Timer
+            this.timerUDP = new DispatcherTimer();
+            this.timerUDP.Interval = TimeSpan.FromMilliseconds(1000 / 30);
+            this.timerUDP.Start();
+            this.timerUDP.Tick += timerKinect_Tick;
         }
 
-        private void timer1_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            if (MainForm.serverConnected)
-                sendUPDOSCDataImage();
-        }*/
+       private void timerKinect_Tick(object sender, EventArgs e)
+       {
+           if (MainForm.serverConnected)
+               sendUPDOSCData();
+       }
+        
+
+     
 
 
         public CoreProcessor(VideoControl video, Label label, MainForm padre)
@@ -82,7 +84,7 @@ namespace ServerKinect.Core
             this.serverStatus = label;
             this.activeDataSources = new List<IDataSource>();
             InitializeGesture();
-          //  initTimer();
+            InitConnection();
 
         }
 
@@ -311,8 +313,8 @@ namespace ServerKinect.Core
         void imageSource_NewImageAvailable(Bitmap newImage)
         {
             bufferBitmap = newImage;
-            if (MainForm.serverConnected)
-                sendUPDOSCData();          
+         //   if (MainForm.serverConnected)
+          //      sendUPDOSCData();          
         }
       
 
@@ -341,12 +343,14 @@ namespace ServerKinect.Core
                 }
 
 
+                //kinect status
+                string kinectStatusText = "";
+                if (padre.getListBoxKinectStatus().Items.Count > 0)                
+                    kinectStatusText = padre.getListBoxKinectStatus().Items[padre.getListBoxKinectStatus().Items.Count - 1].ToString().Split('\t')[0];
 
-
-                if (Hands == null)
-                    server.sendData(skeletonDataTosend, Gesture, "", image, PPS);
-                else
-                    server.sendData(skeletonDataTosend, Gesture, Hands.ToString(), image, PPS);
+               
+                    server.sendData(skeletonDataTosend, Gesture, Hands, image, PPS, kinectStatusText);
+           
                 countPPS++;
                 SDKRgbBitmapDataSource.ImageInUse = false;
                 Gesture = "";
@@ -423,8 +427,8 @@ namespace ServerKinect.Core
           //  if (data.getSkeletons().Count > 0)
           //  {
                 bufferSkeletonData = data;
-                if (!MainForm.sendAllData)
-                    sendUPDOSCData();
+              //  if (!MainForm.sendAllData)
+                  //  sendUPDOSCData();
            // }
             
         }

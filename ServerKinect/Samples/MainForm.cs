@@ -36,7 +36,7 @@ namespace ServerKinect.Samples
         public static bool sendAllData = false;
         private System.Timers.Timer timer1;
         public static int INTERVAL = 5000;
-        private bool clientConnected = false;
+        private List<bool> clientConnected = new List<bool>();
         private OscServer server;
 
         public MainForm()
@@ -65,19 +65,21 @@ namespace ServerKinect.Samples
         {
             if (server != null)
             {
+                int i = 0;
                 foreach (string oscWriter in server.getOscWriterList())
                 {
                     int port = Convert.ToInt32(oscWriter.Split(':')[1]);
                     bool alreadyinuse = (from p in System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().GetActiveUdpListeners() where p.Port == port select p).Count() == 1;
                     labelClientConnected.Text = alreadyinuse.ToString();
-                    if (!clientConnected.Equals(alreadyinuse))
+                    if (!clientConnected[i].Equals(alreadyinuse))
                     {
-                        clientConnected = alreadyinuse;
+                        clientConnected[i] = alreadyinuse;
                         if (alreadyinuse)
                             listBoxLOG.Items.Add("Client Connected " + oscWriter + "  " + DateTime.Now.ToString("T"));
                         else
                             listBoxLOG.Items.Add("Client Disconnected " + oscWriter + "  " + DateTime.Now.ToString("T"));
                     }
+                    i++;
                 }
             }
 
@@ -149,6 +151,8 @@ namespace ServerKinect.Samples
             Cursor.Current = Cursors.Default;
 
         }
+
+        public ListBox getListBoxKinectStatus() { return listBoxKinectStatus; }
 
         public ListBox getListBoxGesture() { return listBoxGesture; }
 
@@ -570,6 +574,7 @@ namespace ServerKinect.Samples
             //  if (!serverConnected)
             //  {
             server.addClient(textBoxHost.Text.ToString(), textBoxSend.Text.ToString());
+            clientConnected.Add(false);
             core.addServer(server);
             this.videoControl.addServerControl(server);
             serverConnected = true;
@@ -635,10 +640,13 @@ namespace ServerKinect.Samples
                             serverConnected = false;
                             labelServerStatus.Text = "Disconnected";
                             comboBoxConnection.Text = "";
+                            restartDataToSend();
+
                         }
                         this.getListBoxLOG().Items.Add("Server Disconnected " + udpWriterSelected.Split(' ')[1] + "  " + DateTime.Now.ToString("T"));
-                        restartDataToSend();
                         server.removeClient(index);
+                        clientConnected.RemoveAt(index);
+
                     }
                 }
             }
